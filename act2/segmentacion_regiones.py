@@ -5,15 +5,15 @@ import numpy as np
 if __name__ == '__main__':
     print("Inicio")
     # Abrimos la imagen
-    img = cv2.imread("im3.jpeg");
+    img = cv2.imread("im1.jpeg");
     print(img.shape)
     # Cambiamos de tamaño (opcional)
     f=0.5
     img_resized=cv2.resize(img, (0,0), fx=f, fy=f)
 
     # Cambiamos de espacio de color (¿cuál espacio nos conviene?)
-    x_ini=1000
-    y_ini=1120
+    x_ini=560
+    y_ini=760
     s_ini=10
     sample =img_resized[int(y_ini*f):int(y_ini*f + s_ini),int(x_ini*f):int(x_ini*f + s_ini),:]
     #print(sample)
@@ -24,8 +24,8 @@ if __name__ == '__main__':
     print("maximo:",max_sample)
 
     # Umbralizamos
-    img_bin=cv2.inRange(img_resized, (75,160,245),(90,175,260)) #contornea solo el 8
-    #img_bin=cv2.inRange(img_resized, min_sample, max_sample) #contornea todas las figuras
+    #img_bin=cv2.inRange(img_resized, (75,160,245),(90,175,260)) #contornea solo el 8
+    img_bin=cv2.inRange(img_resized, min_sample, max_sample) #contornea todas las figuras
 
     kernel = np.ones ((5,5),np.uint8)
     img_closed=cv2.morphologyEx(img_bin,cv2.MORPH_CLOSE,kernel)
